@@ -4,7 +4,7 @@ from .models import Lead, Note
 class LeadForm(forms.ModelForm):
     class Meta:
         model = Lead
-        fields = ['name', 'email', 'source']
+        fields = ['name', 'email', 'source', 'status', 'assigned_to']
 
 
 
