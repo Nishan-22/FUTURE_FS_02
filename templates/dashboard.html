@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRM Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-10">
+
+    <h1 class="text-3xl font-bold mb-6">Lead Dashboard</h1>
+<div class="bg-white shadow rounded-lg p-6 mb-6">
+    <h2 class="text-xl font-bold mb-4">Add New Lead</h2>
+
+    <a href="{% url 'create_lead' %}"
+   class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4 inline-block">
+   + Add Lead
+</a>
+
+    <div class="bg-white shadow rounded-lg p-6">
+        <table class="min-w-full border">
+            <thead>
+                <tr class="bg-gray-200 text-left">
+                    <th class="p-3">Name</th>
+                    <th class="p-3">Email</th>
+                    <th class="p-3">Source</th>
+                    <th class="p-3">Status</th>
+                    <th class="p-3">Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lead in leads %}
+                <tr class="border-t">
+                    <td class="p-3">
+    <a href="{% url 'lead_detail' lead.pk %}" 
+       class="text-blue-600 hover:underline font-semibold">
+        {{ lead.name }}
+    </a>
+</td>
+
+                    <td class="p-3">{{ lead.email }}</td>
+                    <td class="p-3">{{ lead.source }}</td>
+                    <td class="p-3">
+                        {% if lead.status == "new" %}
+                            <span class="text-blue-600 font-semibold">New</span>
+                        {% elif lead.status == "contacted" %}
+                            <span class="text-yellow-600 font-semibold">Contacted</span>
+                        {% elif lead.status == "converted" %}
+                            <span class="text-green-600 font-semibold">Converted</span>
+                        {% endif %}
+                    </td>
+                    <td class="p-3">{{ lead.created_at }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="p-3 text-center text-gray-500">
+                        No leads yet.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

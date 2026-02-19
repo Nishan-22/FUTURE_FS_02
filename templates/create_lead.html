@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Lead</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-10">
+
+    <div class="max-w-xl mx-auto bg-white shadow rounded-lg p-6">
+        <h1 class="text-2xl font-bold mb-6">Add New Lead</h1>
+
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+
+            <div>
+                <label class="block mb-1 font-semibold">Name</label>
+                {{ form.name }}
+            </div>
+
+            <div>
+                <label class="block mb-1 font-semibold">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div>
+                <label class="block mb-1 font-semibold">Source</label>
+                {{ form.source }}
+            </div>
+
+            <button class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+                Create Lead
+            </button>
+        </form>
+
+        <a href="{% url 'dashboard' %}" class="block mt-4 text-blue-600">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+</body>
+</html>
